@@ -1,6 +1,5 @@
 from pages.base_page import Header
 from urls import URLS
-import time
 import allure
 
 class TestHeader:
@@ -19,7 +18,6 @@ class TestHeader:
         header = Header(driver)
 
         header.click_yandex_logo()
-        header.go_to_new_tab()
-        time.sleep(3)
+        header.go_to_new_tab(header.DZEN_MAIN_BUTTON)
 
         assert driver.current_url == URLS.DZEN_PAGE

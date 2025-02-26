@@ -1,6 +1,4 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
 from pages.base_page import BasePage
 import allure
 
@@ -40,17 +38,17 @@ class MainPage(BasePage):
     ]
 
     ORDER_BUTTON = (By.XPATH, ".//button[text() = 'Заказать' and contains(@class, 'Button_Middle')]") # Кнопка "Заказать" в середине страницы
+    COOKIE_BUTTON = (By.XPATH, ".//button[contains(@class, 'App_CookieButton')]")  # Кнопка принятия куки
 
     @allure.step('Нажать на кнопку "Заказать" в середине страницы')
     def click_order_button(self):
-        self.driver.find_element(*self.ORDER_BUTTON).click()
+        self.get_element(self.ORDER_BUTTON).click()
 
     @allure.step('Прокрутить страницу до раздела "Вопросы о важном"')
     def scroll_to_faq(self, question):
-        element = self.driver.find_element(*question)
-        self.driver.execute_script("arguments[0].scrollIntoView();", element)
-        WebDriverWait(self.driver, 3).until(expected_conditions.element_to_be_clickable(question))
+        self.scroll_to_element(question)
+        self.wait_for_clickable_element(question)
 
     @allure.step('Нажать на стрелку рядом с вопросом')
     def click_question(self, question):
-        self.driver.find_element(*question).click()
+        self.get_element(question).click()

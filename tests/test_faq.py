@@ -12,5 +12,5 @@ class TestFAQ:
         main_page.scroll_to_faq(question)
         main_page.click_question(question)
 
-        text = driver.find_element(*answer).text
+        text = main_page.get_element(answer).text
         assert text == expected_answer
