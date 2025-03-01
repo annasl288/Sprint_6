@@ -8,9 +8,8 @@ class BasePage:
     def __init__(self, driver):
         self.driver = driver
 
-    def go_to_new_tab(self, locator):
+    def go_to_new_tab(self):
         self.driver.switch_to.window(self.driver.window_handles[1])
-        WebDriverWait(self.driver, 3).until(expected_conditions.presence_of_element_located(locator))
 
     def get_element(self, locator):
         return self.driver.find_element(*locator)
@@ -21,6 +20,9 @@ class BasePage:
 
     def wait_for_clickable_element(self, locator):
         WebDriverWait(self.driver, 3).until(expected_conditions.element_to_be_clickable(locator))
+
+    def get_current_url(self):
+        return self.driver.current_url
 
 
 class Header(BasePage):
@@ -41,3 +43,6 @@ class Header(BasePage):
     @allure.step('Нажать на лого Яндекса в шапке страницы')
     def click_yandex_logo(self):
         self.get_element(self.YANDEX_LOGO).click()
+
+    def wait_for_dzen_page(self):
+        WebDriverWait(self.driver, 3).until(expected_conditions.presence_of_element_located(self.DZEN_MAIN_BUTTON))

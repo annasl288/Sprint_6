@@ -49,3 +49,6 @@ class OrderPage(BasePage):
     @allure.step('Нажать на кнопку "Да" для подтверждения заказа')
     def confirm_order(self):
         self.get_element(self.CONFIRMATION_BUTTON).click()
+
+    def check_if_order_confirmed(self):
+        return self.get_element(self.ORDER_CONFIRMED_HEADER).is_displayed()

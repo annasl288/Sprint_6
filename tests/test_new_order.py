@@ -16,7 +16,7 @@ class TestNewOrder:
         order_page.fill_out_order_form(Users.user_1)
         order_page.confirm_order()
 
-        assert driver.find_element(*OrderPage.ORDER_CONFIRMED_HEADER).is_displayed()
+        assert order_page.check_if_order_confirmed()
 
     @allure.title('Заказ самоката по клику на кнопку "Заказать" в середине главной страницы')
     def test_order_click_button_main_page(self, driver):
@@ -27,4 +27,4 @@ class TestNewOrder:
         order_page.fill_out_order_form(Users.user_2)
         order_page.confirm_order()
 
-        assert driver.find_element(*OrderPage.ORDER_CONFIRMED_HEADER).is_displayed()
+        assert order_page.check_if_order_confirmed()
